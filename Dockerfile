@@ -5,8 +5,12 @@
 # TO_BUILD:       docker build -rm -t registry .
 # TO_RUN:         docker run -p 5000:5000 registry
 
-# Latest Ubuntu LTS
-FROM ubuntu:14.04
+# Latest Debian Jessie
+FROM 32bit/debian:jessie
+
+MAINTAINER Matthias Hryniszak <padcom@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
 
 # Update
 RUN apt-get update \
@@ -16,7 +20,7 @@ RUN apt-get update \
 # Install deps for backports.lmza (python2 requires it)
         python-dev \
         liblzma-dev \
-        libevent1-dev \
+#        libevent1-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /docker-registry
